@@ -1,6 +1,7 @@
 #ifndef PACKETPP_SIP_LAYER
 #define PACKETPP_SIP_LAYER
 
+#include <unordered_set>
 #include "TextBasedProtocol.h"
 
 /// @file
@@ -116,7 +117,9 @@ namespace pcpp
 		 * A static method that checks whether the port is considered as SIP
 		 * @param[in] port The port number to be checked
 		 */
-		static bool isSipPort(uint16_t port) { return port == 5060 || port == 5061; }
+		static bool isSipPort(uint16_t port);
+
+		static void setSipPorts(const std::unordered_set<uint16_t> &ports);
 
 	protected:
 		SipLayer(uint8_t* data, size_t dataLen, Layer* prevLayer, Packet* packet) : TextBasedProtocolMessage(data, dataLen, prevLayer, packet) {}
@@ -127,6 +130,7 @@ namespace pcpp
 		// implementation of abstract methods
 		char getHeaderFieldNameValueSeparator() const { return ':'; }
 		bool spacesAllowedBetweenHeaderFieldNameAndValue() const { return true; }
+        static std::unordered_set<uint16_t> m_SipPorts;
 	};
 
 

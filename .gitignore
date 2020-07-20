@@ -74,3 +74,5 @@ mk/vs2019/**
 #Tutorial outputs
 Examples/Tutorials/**/Makefile
 Examples/Tutorials/**/*.exe
+
+.idea

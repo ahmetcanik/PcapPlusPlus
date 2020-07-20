@@ -1265,6 +1265,17 @@ std::string SipResponseFirstLine::parseVersion(char* data, size_t dataLen)
 	return std::string(data, nextSpace - data);
 }
 
+std::unordered_set<uint16_t> SipLayer::m_SipPorts = {5060, 5061};
+
+void SipLayer::setSipPorts(const std::unordered_set<uint16_t> &ports)
+{
+    m_SipPorts = ports;
+}
+
+bool SipLayer::isSipPort(uint16_t port)
+{
+    return m_SipPorts.count(port) > 0;
+}
 
 
 }
